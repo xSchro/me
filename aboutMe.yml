@@ -1,9 +1,9 @@
 name: Anton Sangalang
 studentNumber: z5362840
-officialEmail: z5362840@ad.unsw.edu.au
+officialEmail: z5362840@ad.unsw.edu.au 
 contactEmail: # don't write on this line
-  firstBit: Anton.Miguel.Sangalang # this avoids spam, the @ is implied
-  otherBit: gmail.com
+  firstBit: Anton.Miguel.Sangalang # this avoids spam, the @ is implied d
+  otherBit: gmail.com.au
 # accounts
 stackOverflowLink: https://stackoverflow.com/users/16122744/xschro
-github: xSchro
+github: xSchro 

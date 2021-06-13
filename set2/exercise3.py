@@ -1,13 +1,19 @@
 # -*- coding: UTF-8 -*-
 """Modify each function until the tests pass."""
-
+import math
 
 def is_odd(a_number):
     """Return True if a_number is odd, and False if a_number is even.
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-    return None
+
+    even = True
+
+    if math.fmod(a_number, 2) == 0:
+        even = False
+
+    return even
 
 
 def fix_it(moves=True, should_move=True):
@@ -25,7 +31,13 @@ def fix_it(moves=True, should_move=True):
     Most people write this function with 4 return statements. 
     As an extra challenge, see if you can get that down to three.
     """
-    return None
+
+    if moves and not should_move:
+        return 'Duct Tape'
+    elif not moves and should_move:
+        return 'WD-40'
+    else:
+        return 'No Problem'
 
 
 def loops_1a():
@@ -35,7 +47,13 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    return None
+
+    star = []
+
+    for x in range(0,10):
+        star.insert(x, '*')
+
+    return star
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -45,7 +63,12 @@ def loops_1c(number_of_items=5, symbol="#"):
     string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
-    return None
+    Items = []
+
+    for x in range(0,number_of_items):
+        Items.insert(x, symbol)
+
+    return Items
 
 
 def loops_2():
@@ -66,8 +89,14 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    return None
+    Array = []
+    Array2 = []
 
+    for x in range(0,10):
+        Array2.insert(x,'*')
+    for j in range(0,10):
+        Array.insert(j, Array2)
+    return Array 
 
 def loops_3():
     """Make a rising block of numbers.
@@ -90,7 +119,16 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    return None
+    numberArray = []
+
+    for i in range(10):
+        row = []
+        for j in range(10):
+            row.append(str(i))
+        numberArray.append(row)
+
+
+    return numberArray
 
 
 def loops_4():
@@ -110,7 +148,18 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    return None
+
+    numberArrayx = []
+    row2 = []
+    count = []
+
+    for i in range(0, 10):
+        row2.append(str(i))
+    for j in range(10):
+        numberArrayx.append(row2)
+
+    return numberArrayx
+
 
 
 def loops_5():
@@ -137,7 +186,19 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    return None
+    lines = []
+    i_and_j = []
+
+    for i in range(10):
+        coord1 = i
+        for j in range(5):
+            coord2 = j
+            lines.append("(i" + str(coord1) + ", j" + str(coord2) + ")")
+        i_and_j.append(lines)
+        lines = []
+
+    return i_and_j
+
 
 
 def loops_6():
@@ -160,7 +221,16 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    return None
+    
+    done = []
+
+    for i in range (0, 10):
+        lineinput = []
+        for j in range(i+1):
+            lineinput.append(str(j))
+        done.append(lineinput)
+
+    return done
 
 
 def loops_7():
@@ -184,7 +254,31 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    return None
+
+    pyramid = []
+    height = 5
+    width = 9
+    count = 2
+
+    for i in range(height):
+        divfact = width // count
+        pyramidline = []
+        if count < (2*width)/3:
+            for j in range(divfact):
+                pyramidline.append(' ')
+            for k in range(width - (divfact * 2)):
+                pyramidline.append('*')
+            for l in range(divfact):
+                pyramidline.append(' ')
+        else:
+            for m in range(width):
+                pyramidline.append('*')
+
+        count = count + 1
+        pyramid.append(pyramidline)
+
+    return pyramid
+
 
 
 def little_printer(some_kind_of_list, exercise_name):

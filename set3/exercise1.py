@@ -11,16 +11,25 @@ def loop_ranger(start, stop=None, step=1):
     Do this using any method apart from JUST using range() #TODO: clarify this wording
     The look up the docs for range(), you can answer this with just the range 
     function, but we'd like you to do it the long way, probably using a loop.
+    
     """
-    return None
-
+    list = []
+    count = start
+    while count < stop:
+        list.append(count)
+        count = count + step
+    return list
 
 def lone_ranger(start, stop, step):
     """Duplicate the functionality of range.
 
     Look up the docs for range() and wrap it in a 1:1 way
     """
-    return None
+    lists = []
+    for i in range(start, stop, step):
+        lists.append(i)
+
+    return lists
 
 
 def two_step_ranger(start, stop):
@@ -29,7 +38,11 @@ def two_step_ranger(start, stop):
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    return None
+    finished = []
+    for i in range(start, stop, 2):
+        finished.append(i)
+
+    return finished
 
 
 def stubborn_asker(low, high):
@@ -40,7 +53,13 @@ def stubborn_asker(low, high):
 
     Look up the docs for input
     """
-    return None
+
+    value = int(input("Give a number between high and low: "))
+
+    while ((value < low) or (value > high)):
+        value = int(input("Please give another number between high and low: "))
+        print(f"{low}, {high}")
+    return value
 
 
 def not_number_rejector(message):
@@ -50,7 +69,14 @@ def not_number_rejector(message):
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    return None
+    number = input("Give a number ")
+
+    while True:
+        try: 
+            number = int(input("Please give another number!!!: "))
+            return number
+        except:
+            print("Thats not a number!")
 
 
 def super_asker(low, high):
@@ -61,7 +87,21 @@ def super_asker(low, high):
     Try to call at least one of the other functions to minimise the
     amount of code.
     """
-    return None
+
+
+    while True:
+        number = input("Give a number ")
+        try: 
+            number = int(input("Please give another number!!!: "))
+            while ((number < low) or (number > high)):
+                print(f"{low}, {high}")
+                number = int(input("Please give another number between high and low: "))
+            return number
+        except:
+            print("Thats not a number!")
+
+
+
 
 
 if __name__ == "__main__":

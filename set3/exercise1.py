@@ -71,6 +71,13 @@ def not_number_rejector(message):
     """
     number = input("Give a number ")
 
+    try:
+        number = int(number)
+        return number
+    except:
+        print("Thats not a number!")
+        number = 1
+
     while True:
         try: 
             number = int(input("Please give another number!!!: "))
@@ -87,10 +94,16 @@ def super_asker(low, high):
     Try to call at least one of the other functions to minimise the
     amount of code.
     """
+    number = input("give me a number")
 
+    try:
+        number = int(number)
+        return number
+    except:
+        print("Thats not a number!")
+        number = 1
 
     while True:
-        number = input("Give a number ")
         try: 
             number = int(input("Please give another number!!!: "))
             while ((number < low) or (number > high)):

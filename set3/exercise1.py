@@ -54,10 +54,12 @@ def stubborn_asker(low, high):
     Look up the docs for input
     """
 
-    value = int(input("Give a number between high and low: "))
+    value = (low / 2)
 
     while ((value < low) or (value > high)):
-        value = int(input("Please give another number between high and low: "))
+        value = not_number_rejector(f"give me a number between {high} and {low}: ")
+        if ((value < low) or (value > high)):
+            print("but it is not in the range give another.")
         print(f"{low}, {high}")
     return value
 
@@ -69,22 +71,14 @@ def not_number_rejector(message):
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    number = input("Give a number ")
-
-    try:
-        number = int(number)
-        return number
-    except:
-        print("Thats not a number!")
-        number = 1
 
     while True:
-        try: 
-            number = int(input("Please give another number!!!: "))
-            return number
-        except:
-            print("Thats not a number!")
-
+        try:
+            input_number = int(input(message))
+            print("Cool number bro! {}".format(input_number))
+            return input_number
+        except Exception as e:
+            print("{} is not a number!!!".format(e))
 
 def super_asker(low, high):
     """Robust asking function.
@@ -94,26 +88,9 @@ def super_asker(low, high):
     Try to call at least one of the other functions to minimise the
     amount of code.
     """
-    number = input("give me a number")
 
-    try:
-        number = int(number)
-        return number
-    except:
-        print("Thats not a number!")
-        number = 1
-
-    while True:
-        try: 
-            number = int(input("Please give another number!!!: "))
-            while ((number < low) or (number > high)):
-                print(f"{low}, {high}")
-                number = int(input("Please give another number between high and low: "))
-            return number
-        except:
-            print("Thats not a number!")
-
-
+    result = stubborn_asker(low, high)
+    return result
 
 
 

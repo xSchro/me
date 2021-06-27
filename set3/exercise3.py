@@ -5,6 +5,15 @@ Steps on the way to making your own guessing game.
 
 import random
 
+def not_number_rejector(message):
+    while True:
+        try:
+            input_number = int(input(message))
+            print("Cool number bro! {}".format(input_number))
+            return input_number
+        except Exception as e:
+            print("{} is not a number!!!".format(e))
+
 
 def advancedGuessingGame():
     """Play a guessing game with a user.
@@ -26,24 +35,9 @@ def advancedGuessingGame():
     purpose if you can!
     """
 
-    print("\nWelcome to the guessing game!")
-
-    while True:
-        try:
-          lowerBound = int(input("Enter a lower bound: "))
-          break
-        except:
-          print("Please give me a number")
-    while True:
-        try:
-          upperBound = int(input("Enter an upper bound: "))
-          break
-        except:
-          print("Please give me a number")
-
-
-    lowerBound = int(lowerBound)
-    upperBound = int(upperBound)
+    print("\nWelcome to the guessing game!") 
+    lowerBound = not_number_rejector("Enter a lower bound: ")
+    upperBound = not_number_rejector("Enter an upper bound: ")
 
     print("OK then, a number between " + str(lowerBound) + " and {} ?".format(upperBound))
 
@@ -51,13 +45,7 @@ def advancedGuessingGame():
     guessed = False
 
     while not guessed:
-        while True:
-          try:
-            guessedNumber = int(input("Guess a number: "))
-            print("You guessed {},".format(guessedNumber),)
-            break
-          except:
-            print("Please give me a number")
+        guessedNumber = not_number_rejector("guess a number: ")
         if guessedNumber == actualNumber:
             print("You got it!! It was {}".format(actualNumber))
             guessed = True
@@ -69,9 +57,6 @@ def advancedGuessingGame():
             print("Too big, try again :'(")
             if guessedNumber > upperBound:
               print("ITS NOT EVEN IN THE BOUNDS")
-    return "You got it!"
-
-
     return "You got it!"
     # the tests are looking for the exact string "You got it!". Don't modify that!
 

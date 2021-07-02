@@ -36,8 +36,14 @@ def advancedGuessingGame():
     """
 
     print("\nWelcome to the guessing game!") 
+
     lowerBound = not_number_rejector("Enter a lower bound: ")
     upperBound = not_number_rejector("Enter an upper bound: ")
+
+    while lowerBound > upperBound:
+      print("HEY BUDDY THOES VALUES ARE INVALID TRY AGAIN")
+      lowerBound = not_number_rejector("Enter a lower bound: ")
+      upperBound = not_number_rejector("Enter an upper bound: ")
 
     print("OK then, a number between " + str(lowerBound) + " and {} ?".format(upperBound))
 

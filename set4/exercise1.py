@@ -3,6 +3,7 @@
 
 import json
 import os
+from re import L
 import requests
 import inspect
 import sys
@@ -33,10 +34,18 @@ def get_some_details():
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
-    json_data = open(LOCAL + "/lazyduck.json").read()
+
+    with open(LOCAL + "/lazyduck.json", "r", encoding="utf-8") as f:
+        json_data = f.read()
 
     data = json.loads(json_data)
-    return {"lastName": None, "password": None, "postcodePlusID": None}
+
+    last = data["results"][0]["name"]["last"]
+    password = data["results"][0]["login"]["password"]
+    postcode = data["results"][0]["location"]["postcode"]
+    id = int(data["results"][0]["id"]["value"])
+
+    return {"lastName": last, "password": password, "postcodePlusID": postcode + id}
 
 
 def wordy_pyramid():
@@ -73,7 +82,27 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
-    pass
+    list = []
+
+    for urlDigit in range(3, 20, 2):
+        url = (
+            "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
+            + str(urlDigit)
+        )
+        r = requests.get(url)
+        word = r.text
+        list.append(word)
+
+    for urlDigit in range(20, 3, -2):
+        url = (
+            "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
+            + str(urlDigit)
+        )
+        r = requests.get(url)
+        word = r.text
+        list.append(word)
+
+    return list
 
 
 def pokedex(low=1, high=5):
@@ -92,11 +121,29 @@ def pokedex(low=1, high=5):
     """
     template = "https://pokeapi.co/api/v2/pokemon/{id}"
 
-    url = template.format(id=5)
-    r = requests.get(url)
-    if r.status_code is 200:
-        the_json = json.loads(r.text)
-    return {"name": None, "weight": None, "height": None}
+    some_pokemon = []
+
+    for p in range(low, high):
+        url = template.format(id=p)
+        r = requests.get(url)
+        if r.status_code is 200:
+            the_json = json.loads(r.text)
+            some_pokemon.append(the_json)
+
+    height_of_tallest_pokemon = 0
+    tallest_pokemon = ":)"
+
+    for p in some_pokemon:
+        height = p["height"]
+        if height > height_of_tallest_pokemon:
+            height_of_tallest_pokemon = height
+            tallest_pokemon = p
+
+    return {
+        "name": tallest_pokemon["name"],
+        "weight": tallest_pokemon["weight"],
+        "height": tallest_pokemon["height"],
+    }
 
 
 def diarist():
@@ -111,9 +158,25 @@ def diarist():
          might be why. Try in rather than == and that might help.
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
-    TIP: this might come in handy if you need to hack a 3d print file in the future.
+    TIP: this might come in handy if you need to hack a 3d print file in the future. readlines
     """
-    pass
+
+    mode = "r"
+    numbers = 0
+
+    with open("set4/Trispokedovetiles(laser).gcode", mode, encoding="utf-8") as gc:
+        lines = gc.readlines()
+        for line in lines:
+            if "M10" in line:
+                numbers = numbers + 1
+
+    mode = "w+"
+
+    with open("set4/lasers.pew", mode, encoding="utf-8") as gc:
+        stuff = gc.write(str(numbers))
+        for line in stuff:
+            print(stuff)
+        return stuff
 
 
 if __name__ == "__main__":

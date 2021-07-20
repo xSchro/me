@@ -30,14 +30,15 @@ def wordy_pyramid():
         "give_me_a_word?wordlength={length}"
     )
     pyramid_list = []
+
     for i in range(3, 21, 2):
-        url = baseURL.format(length=i)
+        url = baseURL.format(length=i) # i think will still work with just i or length equal i previously.
         r = requests.get(url)
-        if r.status_code is 200:
+        if r.status_code is 200: # 200 could change to variable.
             message = r.text
             pyramid_list.append(message)
         else:
-            print("failed a request", r.status_code, i)
+            print("failed a request", r.status_code, i) # change inside this print to a variable/
     for i in range(20, 3, -2):
         url = baseURL.format(length=i)
         r = requests.get(url)

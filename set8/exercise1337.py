@@ -301,24 +301,27 @@ def fast_filler(number_of_words=200) -> str:
     If you get this one to work, you are a Very Good Programmer™!
     """
 
-    my_dict = make_filler_text_dictionary()
     fname = "dict_cache.json"
-    mode = "w"
+
+    if os.path.isfile(fname) == True:
+
+        with open(fname, "r") as f:
+            my_dict = json.load(f)
+    else:
+        my_dict = make_filler_text_dictionary()
+        input_file = open(fname, mode="w")
+        json.dump(my_dict, input_file)
+        input_file.close()
+
     words = []
 
-    with open(fname, mode, encoding="utf-8") as dictionary:
-        json.dump(my_dict, dictionary, skipkeys=True)
+    for i in range(number_of_words):
+        word_add = my_dict[str(random.randint(3, 7))][random.randint(0, 3)]
+        words.append(word_add)
 
-    mode = "r"
+    words[0] = words[0].capitalize()
 
-    with open(fname, mode, encoding="utf-8") as dict:
-        my_dict = json.load(dict, parse_int=int)
-
-        for i in range(number_of_words):
-            word_add = my_dict[str(random.randint(3, 7))][random.randint(0, 3)]
-            words.append(word_add)
-
-    return words
+    return " ".join(words) + "."
 
 
 if __name__ == "__main__":

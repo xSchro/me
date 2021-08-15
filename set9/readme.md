@@ -1,1 +1,2 @@
 TODO: Reflect on what you learned this week and what is still unclear.
+I am currently working through the folium part of my labs and i am tyring to reasearch it in a way which will best display my story. I also have realised that the answer to my original question was its converse, rappers are influenced by their environment and in actually the rap culture may be showing an alternative lifestyle to those from the areas.
